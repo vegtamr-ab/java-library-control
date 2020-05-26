@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
-    private final ClientRepository clientRepository;
+    private ClientRepository clientRepository;
 
     @Override
     public List<Client> listClients() {

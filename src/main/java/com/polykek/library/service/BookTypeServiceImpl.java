@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class BookTypeServiceImpl implements BookTypeService {
-    private final BookTypeRepository bookTypeRepository;
+    private BookTypeRepository bookTypeRepository;
 
     @Override
     public List<BookType> listBookTypes() {

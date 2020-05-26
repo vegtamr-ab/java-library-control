@@ -3,6 +3,7 @@ package com.polykek.library.service;
 import com.polykek.library.entity.Book;
 import com.polykek.library.exception.BookNotFoundException;
 import com.polykek.library.repository.BookRepository;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
-    private final BookRepository bookRepository;
+    private BookRepository bookRepository;
 
     @Override
     public List<Book> listBooks() {
@@ -27,5 +28,10 @@ public class BookServiceImpl implements BookService {
         } else {
             throw new BookNotFoundException("Book not found!");
         }
+    }
+
+    @Override
+    public Book addBook(Book book) {
+       return bookRepository.save(book);
     }
 }
