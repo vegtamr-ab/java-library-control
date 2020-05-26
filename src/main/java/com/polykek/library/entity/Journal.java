@@ -14,11 +14,11 @@ public class Journal {
     private Integer id;
 
     @ManyToOne
-    @Column(name = "book_id")
+    @JoinColumn(name = "book_id")
     private Book book;
 
     @ManyToOne
-    @Column(name = "client_id")
+    @JoinColumn(name = "client_id")
     private Client client;
 
     @Column(name = "date_beg")
