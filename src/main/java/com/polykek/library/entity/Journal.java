@@ -1,9 +1,12 @@
 package com.polykek.library.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
+@Data
 public class Journal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
