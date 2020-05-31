@@ -12,19 +12,19 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("api")
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
 
-    @GetMapping("/books/all")
+    @GetMapping("books/all")
     public ResponseEntity<List<Book>> getAllBooks() {
         List<Book> list = bookService.listBooks();
 
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/books/{id}")
+    @GetMapping("books/{id}")
     public ResponseEntity<Book> getBook(@PathVariable("id") long id) {
         try {
             return new ResponseEntity<>(bookService.findBook(id), HttpStatus.OK);
@@ -33,8 +33,27 @@ public class BookController {
         }
     }
 
-    @PostMapping(value = "/books/add", consumes = "application/json", produces = "application/json")
+    @PostMapping(value = "books/add", consumes = "application/json", produces = "application/json")
     public Book addBook(@RequestBody Book newBook) {
         return bookService.addBook(newBook);
+    }
+
+
+    @PutMapping(value = "books/{id}", consumes = "application/json", produces = "application/json")
+    public Book updateBook(@PathVariable("id") long id, @RequestBody Book book) {
+        try {
+            return bookService.updateBook(id, book);
+        } catch (BookNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found!");
+        }
+    }
+
+    @DeleteMapping("books/{id}")
+    public void deleteBook(@PathVariable("id") long id) {
+        try {
+            bookService.deleteBook(id);
+        } catch (BookNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found!");
+        }
     }
 }

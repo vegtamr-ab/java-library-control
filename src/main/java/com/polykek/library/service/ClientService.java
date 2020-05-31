@@ -9,4 +9,6 @@ public interface ClientService {
 
     Client findClient(long id);
     Client addClient(Client client);
+    Client updateClient(long id, Client client);
+    void deleteClient(long id);
 }
