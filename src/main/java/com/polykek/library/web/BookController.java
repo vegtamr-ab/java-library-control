@@ -12,19 +12,19 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class BookController {
-    private BookService bookService;
+    private final BookService bookService;
 
-    @GetMapping("/all")
+    @GetMapping("/books/all")
     public ResponseEntity<List<Book>> getAllBooks() {
         List<Book> list = bookService.listBooks();
 
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/books/{id}")
     public ResponseEntity<Book> getBook(@PathVariable("id") long id) {
         try {
             return new ResponseEntity<>(bookService.findBook(id), HttpStatus.OK);
@@ -33,7 +33,7 @@ public class BookController {
         }
     }
 
-    @PostMapping(value = "/add", consumes = "book/json", produces = "book/json")
+    @PostMapping(value = "/books/add", consumes = "application/json", produces = "application/json")
     public Book addBook(@RequestBody Book newBook) {
         return bookService.addBook(newBook);
     }

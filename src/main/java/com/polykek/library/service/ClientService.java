@@ -8,4 +8,5 @@ public interface ClientService {
     List<Client> listClients();
 
     Client findClient(long id);
+    Client addClient(Client client);
 }

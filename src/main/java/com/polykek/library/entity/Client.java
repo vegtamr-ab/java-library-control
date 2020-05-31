@@ -8,22 +8,22 @@ import javax.persistence.*;
 @Data
 public class Client {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "client_id")
+    private Long id;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "pather_name")
     private String patherName;
 
-    @Column(name = "passport_seria", nullable = false)
+    @Column(name = "passport_seria")
     private String passportSeria;
 
-    @Column(name = "passport_num", nullable = false)
-    private String passportName;
+    @Column(name = "passport_num")
+    private String passportNum;
 }

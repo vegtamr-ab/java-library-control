@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ClientServiceImpl implements ClientService {
-    private ClientRepository clientRepository;
+    private final ClientRepository clientRepository;
 
     @Override
     public List<Client> listClients() {
@@ -27,5 +27,10 @@ public class ClientServiceImpl implements ClientService {
         } else {
             throw new ClientNotFoundException("Client not found!");
         }
+    }
+
+    @Override
+    public Client addClient(Client client) {
+        return clientRepository.save(client);
     }
 }

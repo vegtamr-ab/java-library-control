@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class JournalServiceImpl implements JournalService {
 
-    private JournalRepository journalRepository;
+    private final JournalRepository journalRepository;
 
     @Override
     public List<Journal> listJournals() {

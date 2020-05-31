@@ -9,9 +9,9 @@ import java.sql.Date;
 @Data
 public class Journal {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "journal_id")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
