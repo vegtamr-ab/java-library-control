@@ -35,11 +35,13 @@ public class LibrarySecurityConfig extends WebSecurityConfigurerAdapter {
         http.httpBasic().disable().csrf().disable().formLogin().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .antMatchers("/auth/signin").permitAll()
-                .antMatchers(HttpMethod.GET).hasRole("USER")
+                .antMatchers("/auth/signin", "/auth/signup").not().authenticated()
+                .antMatchers("/*", "/css/**", "/js/**", "/fonts/**").permitAll()
+                .antMatchers(HttpMethod.GET).hasAnyRole("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE).hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST).hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT).hasRole("ADMIN")
-                .anyRequest().authenticated().and().apply(new JwtSecurityConfigurer(jwtTokenProvider));
+                .anyRequest().authenticated()
+                .and().apply(new JwtSecurityConfigurer(jwtTokenProvider));
     }
 }
